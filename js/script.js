@@ -36,7 +36,7 @@ var quotes = [
     tags: 'plays'
   },
   {
-    quote: "In the world of business, the people who are most successful are those who are doing what they love.”",
+    quote: "In the world of business, the people who are most successful are those who are doing what they love.",
     source: "Warren Buffet",
     citation: "Rule one investing",
     year: null,
@@ -44,9 +44,9 @@ var quotes = [
   }
 ];
 
-// returns a random number from 0 - 5
+// returns a random number from 0 - 4
 function getRandomNumber(){
-  return Math.floor(Math.random() * 6);
+  return Math.floor(Math.random() * 5);
 }
 
 // retrieves a random number and assigns it to the index of the quotes array to get random quote
@@ -60,26 +60,30 @@ function getRandomQuote() {
 function printQuote(){
   var randomQuote = getRandomQuote();
   var htmlStr = '';
+
     // if the quote has a citaiton, it will print the quote with the citation
     if ( randomQuote.citation != null ) {
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
       htmlStr += '<p class="source">' + randomQuote.source;
       htmlStr += '<span class="citation">' + randomQuote.citation + '</span>';
-      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>';
+
     // if the quote has a citaiton, it will print the quote with the citation
     } else if ( randomQuote.year != null ){
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
       htmlStr += '<p class="source">' + randomQuote.source;
       htmlStr += '<span class="year">' + randomQuote.year + '</span>';
-      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>';
+
     // prints the quote normally
     } else {
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
       htmlStr += '<p class="source">' + randomQuote.source;
-      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>';
     }
 
-  return htmlStr;
+  // Looks for the id: quote-box and htmlStr is assigned, printing the quote to the page
+  document.getElementById('quote-box').innerHTML = htmlStr;
 }
 
 // generate a random color
@@ -93,12 +97,13 @@ function changeQuote(){
   var g = generateRandomColor();
   var b = generateRandomColor();
   document.body.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
-  document.getElementById('quote-box').innerHTML = printQuote();
+  printQuote();
 }
+
+// prints a quote to the page onload
+window.onload = printQuote;
 
 // prints a new quote to the page every 5 seconds
 window.setInterval(changeQuote, 5000);
-
-document.getElementById('quote-box').innerHTML = printQuote();
 
 // document.getElementById('loadQuote').addEventListener("click", printQuote, false);
