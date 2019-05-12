@@ -11,31 +11,36 @@ var quotes = [
     quote: "Give me liberty, or give me death!",
     source: "Patrick Henry",
     year: 1775,
-    citation: null
+    citation: null,
+    tags: 'history'
   },
   {
     quote: "The Way Get Started Is To Quit Talking And Begin Doing",
     source: "Walt Disney",
     year: null,
-    citation: null
+    citation: null,
+    tags: 'success'
   },
   {
     quote: "Whether You Think You Can Or Think You Can’t, You’re Right",
     source: "Henry Ford",
     year: null,
-    citation: null
+    citation: null,
+    tags: 'success'
   },
   {
     quote: "To be, or not to be, that is the question.",
     source: "Shakesphere: Hamlet Act 3, Scene 1",
     year: null,
-    citation: null
+    citation: null,
+    tags: 'plays'
   },
   {
     quote: "In the world of business, the people who are most successful are those who are doing what they love.”",
     source: "Warren Buffet",
     citation: "Rule one investing",
-    year: null
+    year: null,
+    tags: 'business'
   }
 ];
 
@@ -59,27 +64,40 @@ function printQuote(){
     if ( randomQuote.citation != null ) {
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
       htmlStr += '<p class="source">' + randomQuote.source;
-      htmlStr += '<span class="citation">' + randomQuote.citation + '</span></p>';
-    
+      htmlStr += '<span class="citation">' + randomQuote.citation + '</span>';
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
     // if the quote has a citaiton, it will print the quote with the citation
     } else if ( randomQuote.year != null ){
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
       htmlStr += '<p class="source">' + randomQuote.source;
-      htmlStr += '<span class="year">' + randomQuote.year + '</span></p>';
-
+      htmlStr += '<span class="year">' + randomQuote.year + '</span>';
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
     // prints the quote normally
     } else {
       htmlStr = '<p class="quote">' + randomQuote.quote + '</p>';
-      htmlStr += '<p class="source">' + randomQuote.source + '</p>';
+      htmlStr += '<p class="source">' + randomQuote.source;
+      htmlStr += '<span class="tags">' + randomQuote.tags + '</span></p>'
     }
 
   return htmlStr;
 }
 
-// implemented onClick event for button
+// generate a random color
+function generateRandomColor(){
+  return Math.floor(Math.random() * 256);
+}
+
+// implemented onClick event for button, generate random background color for each quote change
 function changeQuote(){
+  var r = generateRandomColor();
+  var g = generateRandomColor();
+  var b = generateRandomColor();
+  document.body.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
   document.getElementById('quote-box').innerHTML = printQuote();
 }
+
+// prints a new quote to the page every 5 seconds
+window.setInterval(changeQuote, 5000);
 
 document.getElementById('quote-box').innerHTML = printQuote();
 
